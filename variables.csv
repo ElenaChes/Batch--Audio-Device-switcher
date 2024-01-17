@@ -1,0 +1,8 @@
+SoundVolumeView,svcl.exe
+TIMEOUT,2
+COLUMN,Default
+DEFAULT,Render
+S_DEVICE,Speakers
+H_DEVICE,Headset-Headphones
+S_VOLUME,4
+H_VOLUME,50
