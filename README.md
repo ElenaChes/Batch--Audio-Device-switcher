@@ -11,6 +11,7 @@ Description: a collection of scripts that can set the default audio device, chec
 - [Scripts](#scripts)
   - [CheckDevice.bat](#checkdevicebat)
   - [SwitchDevice.bat](#switchdevicebat)
+  - [PromptSwitch.bat](#promptswitchbat)
   - [SwitchHeadset.bat](#switchheadsetbat)
   - [SwitchSpeakers.bat](#switchspeakersbat)
 - [Usage](#usage)
@@ -27,7 +28,7 @@ The scripts could work with different versions, but that is the ones that was te
 # Installation
 
 1. Download and unpack the dependency.
-2. Download the desired scripts and `variables.csv`
+2. Download the desired scripts and `variables.csv`. The scripts are intentionally separate from each other, so you can download only the ones that you're going to use.
 
 > [!TIP]
 > Place the files in the same folder as `svcl.exe` for ease of use.
@@ -52,7 +53,7 @@ H_VOLUME,<default volume for 2nd device>
 
 ## CheckDevice.bat
 
-Checks which audio device (out of 2 options) is currently set as default and displays the information in a popup. If it's neither an error message will be displayed.
+Checks which audio device (out of 2 options) is currently set as default and displays the information in a popup. If the current default device isn't one of the options an error message will be displayed.
 
 ### Required variables:
 
@@ -67,7 +68,7 @@ Checks which audio device (out of 2 options) is currently set as default and dis
 
 ## SwitchDevice.bat
 
-Checks which audio device (out of 2 options) is currently set as default , sets the other device to default and displays the information in a popup. If it's neither an error message will be displayed.
+Checks which audio device (out of 2 options) is currently set as default, sets the other device to default and displays the information in a popup. If the current default device isn't one of the options an error message will be displayed.
 
 ### Required variables:
 
@@ -81,6 +82,27 @@ Checks which audio device (out of 2 options) is currently set as default , sets 
 4. Uses `SoundVolumeView` to switch default device to the other device.
 5. Uses `SoundVolumeView` to set default volume to the other device's default volume.
 6. Displays info popup for `TIMEOUT` seconds.
+
+## PromptSwitch.bat
+
+Checks which audio device (out of 2 options) is currently set as default, displays the information in a popup and asks user if should switch devices. If user selects "ok" in the prompt, sets the other device to default and displays the information in a popup. If the current default device isn't one of the options an error message will be displayed.
+
+### Required variables:
+
+- SoundVolumeView, TIMEOUT, COLUMN, DEFAULT, H_DEVICE, S_DEVICE, H_VOLUME, S_VOLUME
+
+### Script behaviour:
+
+1. Reads variables from `VARS_PATH` (relative path to `variables.csv`, declared inside the script)
+2. Uses `SoundVolumeView` to get the value of `COLUMN` for `S_DEVICE` and `H_DEVICE`.
+3. Finds which device's state is set to the `DEFAULT` keyword.
+4. Displays prompt popup.
+5. If selected "ok":
+   - Uses `SoundVolumeView` to switch default device to the other device.
+   - Uses `SoundVolumeView` to set default volume to the other device's default volume.
+   - Displays info popup for `TIMEOUT` seconds.
+6. If selected "cancel":
+   - Exits.
 
 ## SwitchHeadset.bat
 
