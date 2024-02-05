@@ -24,20 +24,18 @@ for /f "tokens=1, 2 delims=," %%a in ('type %VARS_PATH%') do (
 for /f "delims=" %%a in ('%SoundVolumeView% /GetColumnValue %H_DEVICE% %COLUMN%') do (
 	REM Headset
 	call if "%%a" == "%DEFAULT%" (
-		set "CUR_DEVICE=%H_DEVICE%"
 		set "DEVICE=%S_DEVICE%"
 		set "VOLUME=%S_VOLUME%"
-		set "INFO=%H_DEVICE% -^> %S_DEVICE%"
+		set "INFO=%H_DEVICE% → %S_DEVICE%"
 		GOTO DISPLAY
 	)
 )
 for /f "delims=" %%a in ('%SoundVolumeView% /GetColumnValue %S_DEVICE% %COLUMN%') do (
 	REM Speakers
 	call if "%%a" == "%DEFAULT%" (
-		set "CUR_DEVICE=%S_DEVICE%"
 		set "DEVICE=%H_DEVICE%"
 		set "VOLUME=%H_VOLUME%"
-		set "INFO=%S_DEVICE% -^> %H_DEVICE%"
+		set "INFO=%S_DEVICE% → %H_DEVICE%"
 		GOTO DISPLAY
 	)
 )
@@ -49,8 +47,8 @@ GOTO END
 ::---------------------------------------------------------------------
 :DISPLAY
 :: Display device
-echo Current: %CUR_DEVICE%
-CScript //nologo //E:JScript "%~F0" 0 %CUR_DEVICE%
+echo Prompt: %INFO%
+CScript //nologo //E:JScript "%~F0" 0 "%INFO%"
 ::---------------------------------------------------------------------
 :: Response. ok=1, cancel=2
 if "%errorlevel%" == "1" (

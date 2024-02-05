@@ -23,7 +23,7 @@ for /f "delims=" %%a in ('%SoundVolumeView% /GetColumnValue %H_DEVICE% %COLUMN%'
 		REM Switch Headset -> Speakers
 		set "DEVICE=%S_DEVICE%"
 		set "VOLUME=%S_VOLUME%"
-		set "INFO=%H_DEVICE% -^> %S_DEVICE%"
+		set "INFO=%H_DEVICE% → %S_DEVICE%"
 		GOTO SWITCH
 	)
 )
@@ -33,7 +33,7 @@ for /f "delims=" %%a in ('%SoundVolumeView% /GetColumnValue %S_DEVICE% %COLUMN%'
 		REM Switch Speakers -> Headset
 		set "DEVICE=%H_DEVICE%"
 		set "VOLUME=%H_VOLUME%"
-		set "INFO=%S_DEVICE% -^> %H_DEVICE%"
+		set "INFO=%S_DEVICE% → %H_DEVICE%"
 		GOTO SWITCH
 	)
 )
