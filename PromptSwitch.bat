@@ -1,5 +1,6 @@
 @if (@CodeSection == @Batch) @then
 @echo off
+chcp 65001 > NUL
 setlocal enabledelayedexpansion
 set "VARS_PATH=variables.csv"
 ::---------------------------------------------------------------------
